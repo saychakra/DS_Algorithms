@@ -1,0 +1,13 @@
+6 5
+1 2
+2 3
+3 1
+2 6
+4 5
+
+first line contains the number of nodes and edges. There are 6 nodes and 5 edges.
+from the second line, we have the values of all the nodes that are connected to each other. Hence the graph stucture is somewhat like:
+
+1 ---- 2 ---- 6           4 ---- 5
+\     /
+   3
