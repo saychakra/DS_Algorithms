@@ -5,33 +5,46 @@ public class SegTrees {
 	public static void main(String[] args) {
 		// just creating an array of size 10 with random elements as of now
 		Random random = new Random(5);
-		int n = 10;
-		int[] arr = new int[n];
-		for (int i=0; i<n; ++i) {
-			arr[i] = 1+random.nextInt(10);
+		int T=1000;
+		for(int tt=0; tt < T; tt++) {
+			//make a random array
+			int n = 1 + random.nextInt(10);
+			int[] a = new int[n];
+			for(int i = 0; i < n; i++) a[i] = random.nextInt(10);
+			
+			// initiating segTree instance
+			SegTree st=new SegTree(0, n-1, a);
+			
+			//answer a bunch of queries and updates to check if SegTree works
+			int nQueries = 100;
+			for(int qq=0; qq < nQueries; qq++) {
+				if(random.nextBoolean()) {
+					//range sum query
+					int l = random.nextInt(n);
+					int r = random.nextInt(n);
+					int ans = 0;
+					for(int i=l; i<=r; i++) ans+=a[i];
+					
+					//TODO: Query segTree
+					int stSum = st.rangeSum(l, r);
+					if(stSum != ans) {
+						System.out.println("Tests not passed\n");
+						throw null;
+					}
+					
+				} else {
+					//point update query
+					int index = random.nextInt(n);
+					int newVal = random.nextInt(10);
+					a[index] = newVal;
+					
+					//TODO: update segTree
+					st.pointUpdate(index, newVal);
+				}
+			}
+			System.out.println("Test case : " + (tt+1) + " passed");
 		}
-		//printing the array for reference:
-		System.out.println("Array Elements:");
-		for(int val : arr) System.out.print(val + " ");
-		System.out.println();
-		
-		// range sum query
-		int l = 2, r = 4;
-		int slowSum = 0;
-		System.out.println("Querying sum between " + l + " " + r);
-		for (int i=l; i<=r; ++i) {
-			slowSum += arr[i];
-		}
-		System.out.println("Actual sum in slow way: " + slowSum);
-		
-		SegTree st = new SegTree(0, n-1, arr);
-		int stRangeSum = st.rangeSum(l, r);
-		System.out.println("Segment Tree range sum: " + stRangeSum);
-		if(stRangeSum == slowSum) {
-			System.out.println("Segment tree worked :)");
-		} else {
-			System.out.println("No Match :(");
-		}
+		System.out.println("All tests passed!");
 	}
 	
 	static class SegTree {
