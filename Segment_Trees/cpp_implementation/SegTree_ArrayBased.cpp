@@ -3,6 +3,8 @@ using namespace std;
 
 const int N=1e5;
 int n;
+// st size can be 2n+1 or to be on the safe side just take N
+// vector<int> st((2*n)+1);
 vector<int> st(2*N);
 
 void build(vector<int> arr) {
@@ -15,16 +17,21 @@ void build(vector<int> arr) {
 
 int sumRange(int l, int r) {
     int res = 0;
-    for(l += n, r += n; l < r; l >>= 1, r >>= 1) {
-        if(l&1)         res+= st[l++];
-        if(r&1)         res+= st[--r];
+    for(l += n, r += n; l < r; l /= 2, r /= 2) {
+        if((l % 2) != 0) 
+            // to have range (l to r both inclusive)
+            res += st[++l];
+            // if r is to be excluded
+            // res += st[l++];
+        if((r % 2) != 0) 
+            res += st[--r];
     }
     return res;
 }
 
 int slowSum(int l, int r, vector<int> arr) {
     int sum = 0;
-    for(int i = l; i < r; i++) {
+    for(int i = l; i <= r; i++) {
         sum += arr[i];
     }
     return sum;
