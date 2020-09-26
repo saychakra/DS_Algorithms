@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class SegTree_test {
+public class SegTrees {
 
 	public static void main(String[] args) {
 		// just creating an array of size 10 with random elements as of now
