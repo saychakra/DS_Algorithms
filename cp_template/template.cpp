@@ -28,9 +28,7 @@ bool are_equal (T a, U b) {
 // input for vector
 template <class T, class U>
 void read(vector<T> &v, U size) {
-    for(int i = 0; i < size; i++) {
-        T x; cin >> x; v.push_back(x);
-    }
+    for(auto &x : v)    cin >> x;
 }
 // for printing the vector 
 template<class T>
