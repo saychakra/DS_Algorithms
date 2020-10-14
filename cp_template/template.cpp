@@ -6,7 +6,7 @@
 using namespace std;
 #define FOR(i,a,b) for (int i = a; i < b; ++i)
 #define ROF(i,a,b) for (int i = a; i > b; --i)
-#define ll long long
+#define ll int64_t
 #define vi vector<int>
 #define vll vector<long long>
 #define vs vector<string>
@@ -19,22 +19,17 @@ using namespace std;
 #define PI 3.1415926535897932384626
 
 
-// ============================== templates for reading inputs, printing vectors, comparison ==============================
+// ============================== templates for reading and printing vectors, comparing to values ==============================
 // comparison template
 template <class T, class U>
 bool are_equal (T a, U b) {
     return (a==b);
 }
-// input template
-template <class T>
-void read(T &a) {
-    cin >> a;
-}
 // input for vector
 template <class T, class U>
 void read(vector<T> &v, U size) {
     for(int i = 0; i < size; i++) {
-        T x; read(x); v.push_back(x);
+        T x; cin >> x; v.push_back(x);
     }
 }
 // for printing the vector 
@@ -45,6 +40,11 @@ void debv(vector<T> &v){
     }
 }
 
+// sorting any vector in descending order
+template<class T>
+void dsort(vector<T> &v) {
+    sort(all(v), greater<T>());
+}
 //=======================
 const int MOD = 1'000'000'007;
 const int N = 2e6+13, M = N;
